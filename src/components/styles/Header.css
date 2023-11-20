@@ -1,0 +1,23 @@
+.header-navbar {
+  background-color: #343a40; /* O el color que prefieras */
+}
+
+.navbar-brand {
+  color: #fff;
+}
+
+.logo {
+  height: 50px; /* Ajusta según el tamaño de tu logo */
+}
+
+.login-icon {
+  color: #fff !important;
+}
+
+.nav-link, .dropdown-toggle {
+  color: #fff !important;
+}
+
+.dropdown-menu {
+  right: 0;
+}

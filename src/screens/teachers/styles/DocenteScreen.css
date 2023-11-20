@@ -1,0 +1,64 @@
+/* Estilos para DocenteScreen.css */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem; /* Espacio adicional en la parte superior de la tabla */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Sombra sutil para la tabla */
+  border-radius: 8px; /* Bordes redondeados */
+  overflow: hidden; /* Ocultar bordes para celdas en esquinas */
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  vertical-align: middle; /* Alinear contenido verticalmente */
+}
+
+th {
+  background-color: #007bff; /* Color azul para encabezados */
+  color: white; /* Texto blanco para encabezados */
+  font-size: 1.05em; /* Tamaño de fuente más grande para encabezados */
+}
+
+input[type="text"], input[type="number"] {
+  width: 100%;
+  padding: 6px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  border: 1px solid #ced4da; /* Borde más sutil para inputs */
+  border-radius: 4px; /* Bordes redondeados para inputs */
+}
+
+button {
+  padding: 6px 12px;
+  background-color: #007bff; /* Color azul para botones */
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px; /* Bordes redondeados para botones */
+  margin-right: 8px; /* Espacio entre botones */
+}
+
+button:hover {
+  background-color: #0069d9; /* Color más oscuro al pasar el ratón */
+}
+
+/* Selector de grado y materia */
+.select-dropdown {
+  margin-bottom: 1rem;
+  width: 100%;
+  box-shadow: none; /* Quitar sombra para selectores */
+  border-radius: 4px; /* Bordes redondeados para selectores */
+}
+
+/* Estilos para responsive */
+@media (max-width: 768px) {
+  .select-dropdown {
+      margin-bottom: 0.5rem;
+  }
+  button {
+      width: 100%; /* Botones de ancho completo en móviles */
+      margin-bottom: 0.5rem;
+  }
+}

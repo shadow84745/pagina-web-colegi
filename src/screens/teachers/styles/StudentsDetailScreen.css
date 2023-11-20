@@ -1,0 +1,53 @@
+/* Estilo para el nombre del estudiante */
+.student-name {
+    color: #007bff; /* Cambia el color según tus preferencias */
+    font-weight: bold;
+  }
+  
+  /* Estilos Generales */
+  .container {
+    padding: 20px;
+  }
+  
+  /* Estilos de la Tabla */
+  .table {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  .table th {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .table td, .table th {
+    padding: 15px;
+    text-align: center;
+  }
+  
+  /* Botones */
+  .btn-custom {
+    background-color: #007bff;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-custom:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Modal */
+  .modal-header {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .modal-body {
+    padding: 20px;
+  }
+  
