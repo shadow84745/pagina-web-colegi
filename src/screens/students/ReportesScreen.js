@@ -3,6 +3,8 @@ import { db } from '../../utils/firebaseConfig';
 import { collection, query, where, getDocs, doc, getDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import './styles/ReportesScreen.css'
+import { Page, Text, View, Document, StyleSheet, PDFDownloadLink, Image } from '@react-pdf/renderer';
+import logou from  "../../images/corhuilalogo.png";
 
 const ReportesScreen = () => {
     const [reportData, setReportData] = useState([]);
@@ -17,6 +19,49 @@ const ReportesScreen = () => {
 
         fetchGrades();
     }, [user.uid]);
+
+    const styles = StyleSheet.create({
+        page: {
+            flexDirection: 'column',
+            backgroundColor: '#E4E4E4'
+        },
+        section: {
+            margin: 10,
+            padding: 10,
+            flexGrow: 1
+        },
+        logo: {
+            width: 150, // o el tamaño que prefieras
+            height: 'auto',
+            alignSelf: 'center',
+            margin: 10
+        }
+    });
+
+    const MyDocument = ({ reportData }) => (
+        <Document>
+            <Page size="A4" style={styles.page}>
+                <Image
+                  style={styles.logo}
+                  src={logou} // reemplaza con la ruta de tu logo
+                />
+                <View style={styles.section}>
+                    <Text>Reporte de Notas</Text>
+                    {reportData.map((item, index) => (
+                        <Text key={index}>
+                            {item.subject}: {item.finalGrade ? `Final - ${item.finalGrade}` : 'Aun no hay nota definitiva'}
+                        </Text>
+                    ))}
+                </View>
+            </Page>
+        </Document>
+    );
+
+    const DownloadPDFReport = ({ reportData }) => (
+        <PDFDownloadLink document={<MyDocument reportData={reportData} />} fileName="reporte_notas.pdf">
+            {({ blob, url, loading, error }) => (loading ? 'Cargando documento...' : 'Descargar reporte de notas')}
+        </PDFDownloadLink>
+    );
 
     async function getAllStudentGrades(studentId) {
         let allGrades = [];
@@ -77,7 +122,7 @@ const ReportesScreen = () => {
 
 
     // Función para descargar el reporte
-    const downloadReport = () => {
+    /*const downloadReport = () => {
         let csvContent = "data:text/csv;charset=utf-8,";
         // Encabezados
         csvContent += "Materia,Nota Final\n";
@@ -96,18 +141,16 @@ const ReportesScreen = () => {
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-    };
+    };*/
 
     const capitalize = (str) => {
         return str.replace(/(?:^|\s)\S/g, a => a.toUpperCase());
-      };
+    };
 
     return (
         <div className="container mt-5 report-container">
-            <h1 className="text-center mb-4">Reporte de Notas</h1>
-            <button className="btn btn-primary mb-3" onClick={downloadReport}>
-                Descargar Reporte
-            </button>
+             <h1 className="text-center mb-4">Reporte de Notas</h1>
+            <DownloadPDFReport reportData={reportData} />
 
             <div className="table-responsive">
                 <table className="table table-hover table-striped">

@@ -3,13 +3,14 @@ import { Container, Row, Col, Carousel, Card } from 'react-bootstrap';
 import { School, EmojiEvents, AutoStories } from '@mui/icons-material';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import corhuilalogo from '../../images/corhuilalogo.png'
+import './styles/HomeScreen.css'
 
 const HomeScreen = () => {
   return (
     <Container fluid>
       <Carousel>
         <Carousel.Item>
-          <img src={corhuilalogo} alt='slider-logo' />
+          <img src={corhuilalogo} alt='slider-logo' className='logo-home'/>
         </Carousel.Item>
 
       </Carousel>
@@ -47,6 +48,14 @@ const HomeScreen = () => {
               </Card.Text>
             </Card.Body>
           </Card>
+        </Col>
+      </Row>
+
+
+      <Row className="my-5">
+        <Col>
+          <h2 className="text-center">Últimas Noticias</h2>
+          {/* Aquí puedes insertar un carrusel o lista de noticias */}
         </Col>
       </Row>
 

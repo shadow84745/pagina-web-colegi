@@ -7,9 +7,13 @@ import './styles/DocenteScreen.css'
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
+import { TextField, Button, Select, MenuItem } from '@mui/material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faEye } from '@fortawesome/free-solid-svg-icons';
+
 
 const DocenteScreen = () => {
-    const grados = ['Seleccione un grado', 'primero', 'segundo', 'tercero', 'cuarto', 'quinto', 'sexto']; // Asegúrate de que coincidan con la base de datos
+    const grados = ['primero', 'segundo', 'tercero', 'cuarto', 'quinto', 'sexto']; // Asegúrate de que coincidan con la base de datos
     const [materias, setMaterias] = useState([]); // Materias del docente
     const [estudiantes, setEstudiantes] = useState([]); // Estudiantes en el curso seleccionado
     const [gradoSeleccionado, setGradoSeleccionado] = useState('');
@@ -64,6 +68,42 @@ const DocenteScreen = () => {
 
     const handleAgregarNota = async (estudianteId, nombreNota, valorNota, porcentajeNota) => {
         try {
+            // Validación de campos vacíos
+            if (!nombreNota || !valorNota || !porcentajeNota) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Todos los campos deben estar llenos.',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                });
+                return;
+            }
+
+            // Convertir a número y validar calificación y porcentaje
+            const valorNotaNum = parseFloat(valorNota);
+            const porcentajeNotaNum = parseFloat(porcentajeNota);
+
+            if (valorNotaNum < 0 || valorNotaNum > 5) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'La calificación debe estar entre 0 y 5.',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                });
+                return;
+            }
+
+            if (porcentajeNotaNum < 0.01 || porcentajeNotaNum > 1) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'El porcentaje debe estar entre 0.01 y 1.',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                });
+                return;
+            }
+
+
             if (materiaSeleccionada && estudianteId && nombreNota !== undefined && valorNota !== undefined && porcentajeNota !== undefined) {
                 const porcentajeNuevo = parseFloat(porcentajeDeLaNota);
 
@@ -131,26 +171,38 @@ const DocenteScreen = () => {
 
     const capitalize = (str) => {
         return str.replace(/(?:^|\s)\S/g, a => a.toUpperCase());
-      };
+    };
 
     return (
         <div className="container mt-4">
             <h2 className="text-center mb-4">Subir Notas</h2>
             <div className="row">
                 <div className="col-md-6">
-                    <select className="form-select select-dropdown" value={gradoSeleccionado} onChange={(e) => setGradoSeleccionado(e.target.value)}>
+                    <Select
+                        value={gradoSeleccionado}
+                        onChange={(e) => setGradoSeleccionado(e.target.value)}
+                        displayEmpty
+                        className="select-dropdown"
+                    >
+                        <MenuItem value="">Seleccione un grado</MenuItem>
                         {grados.map(grado => (
-                            <option key={grado} value={grado}>{grado}</option>
+                            <MenuItem key={grado} value={grado}>{grado}</MenuItem>
                         ))}
-                    </select>
+                    </Select>
                 </div>
+
                 <div className="col-md-6">
-                    <select className="form-select select-dropdown" value={materiaSeleccionada?.id || ''} onChange={handleMateriaChange}>
-                        <option value="">Seleccione una materia</option>
+                    <Select
+                        value={materiaSeleccionada?.id || ''}
+                        onChange={handleMateriaChange}
+                        displayEmpty
+                        className="select-dropdown"
+                    >
+                        <MenuItem value="">Seleccione una materia</MenuItem>
                         {materias.map(materia => (
-                            <option key={materia.id} value={materia.id}>{materia.name}</option>
+                            <MenuItem key={materia.id} value={materia.id}>{materia.name}</MenuItem>
                         ))}
-                    </select>
+                    </Select>
                 </div>
             </div>
             <table className="table table-hover table-custom">
@@ -168,26 +220,58 @@ const DocenteScreen = () => {
                         <tr key={estudiante.id}>
                             <td>{capitalize(estudiante.surname) + " " + capitalize(estudiante.name)}</td>
                             <td>
-                                <input type="text" value={nombreDeLaNota} onChange={(e) => setNombreDeLaNota(e.target.value)} placeholder="Nombre de la nota" />
+                                <TextField
+                                    type="text"
+                                    value={nombreDeLaNota}
+                                    onChange={(e) => setNombreDeLaNota(e.target.value)}
+                                    placeholder="Nombre de la nota"
+                                    variant="outlined"
+                                    size="small"
+                                />
                             </td>
                             <td>
-                                <input type="number" value={valorDeLaNota} onChange={(e) => setValorDeLaNota(e.target.value)} placeholder="Calificacion(Entre 0 a 5)" />
+                                <TextField
+                                    type="number"
+                                    value={valorDeLaNota}
+                                    onChange={(e) => setValorDeLaNota(e.target.value)}
+                                    placeholder="Calificación (Entre 0 a 5)"
+                                    variant="outlined"
+                                    size="small"
+                                />
                             </td>
                             <td>
-                                <input type="number" value={porcentajeDeLaNota} onChange={(e) => setPorcentajeDeLaNota(e.target.value)} placeholder="Porcentaje" />
+                                <TextField
+                                    type="number"
+                                    value={porcentajeDeLaNota}
+                                    onChange={(e) => setPorcentajeDeLaNota(e.target.value)}
+                                    placeholder="Porcentaje"
+                                    variant="outlined"
+                                    size="small"
+                                />
                             </td>
+
                             <td>
-                                <button onClick={() => handleAgregarNota(
-                                    estudiante.id,
-                                    nombreDeLaNota,
-                                    parseFloat(valorDeLaNota), // Convierte a número si es necesario
-                                    parseFloat(porcentajeDeLaNota) // Convierte a número si es necesario
-                                )}>
-                                    Agregar Nota
-                                </button>
-                                <button onClick={() => navigate(`/student-profile/${estudiante.id}`, { state: { cursoId: materiaSeleccionada.id } })}>
-                                    Ver Notas
-                                </button>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={() => handleAgregarNota(
+                                        estudiante.id,
+                                        nombreDeLaNota,
+                                        parseFloat(valorDeLaNota),
+                                        parseFloat(porcentajeDeLaNota)
+                                    )}
+                                    className='action-button'
+                                >
+                                    <FontAwesomeIcon icon={faPlus} /> Agregar Nota
+                                </Button>
+                                <Button
+                                    className='action-button'
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={() => navigate(`/student-profile/${estudiante.id}`, { state: { cursoId: materiaSeleccionada.id } })}
+                                >
+                                    <FontAwesomeIcon icon={faEye} /> Ver Notas
+                                </Button>
                             </td>
                         </tr>
                     ))}

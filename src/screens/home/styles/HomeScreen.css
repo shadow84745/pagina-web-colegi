@@ -1,0 +1,32 @@
+/* Estilos para HomeScreen.css */
+
+.carousel-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-title {
+    color: #007bff; /* Color principal de la institución */
+  }
+  
+  h2 {
+    color: #007bff;
+    margin-bottom: 20px;
+  }
+
+.logo-home{
+    width: 400px !important;
+}
+  
+  /* Estilos responsivos */
+  @media (max-width: 768px) {
+    .carousel-item img {
+      height: 200px; /* Ajustar según sea necesario */
+    }
+  }
+  

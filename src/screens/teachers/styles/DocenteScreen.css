@@ -52,6 +52,10 @@ button:hover {
   border-radius: 4px; /* Bordes redondeados para selectores */
 }
 
+.action-button{
+  margin-top: 15px !important;
+}
+
 /* Estilos para responsive */
 @media (max-width: 768px) {
   .select-dropdown {
@@ -62,3 +66,4 @@ button:hover {
       margin-bottom: 0.5rem;
   }
 }
+

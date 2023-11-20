@@ -1,0 +1,79 @@
+/* Estilos Generales */
+body {
+    font-family: 'Arial', sans-serif;
+    color: #333333;
+}
+
+/* Título Principal */
+h1 {
+    color: #2E5077; /* Un color oscuro para formalidad */
+    margin-bottom: 20px;
+}
+
+/* Carrusel */
+.carousel-item {
+    text-align: center;
+}
+
+.carousel-caption h3 {
+    color: #FFFFFF;
+    background-color: rgba(46, 80, 119, 0.75); /* Fondo oscuro con opacidad */
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.carousel-caption p {
+    color: #F1F1F1;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+    padding: 5px;
+    border-radius: 5px;
+}
+
+/* Tarjetas Informativas */
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.3);
+}
+
+.card-content {
+    padding: 15px;
+}
+
+/* Anuncios Académicos */
+.anuncios {
+    background-color: #EFEFEF; /* Color claro y neutral */
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.anuncios h2 {
+    color: #2E5077;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.5em;
+    }
+}
+
+.header {
+    background-color: #6f767d; /* Color de fondo */
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.header h1 {
+    color: #ffffff; /* Color del texto */
+    font-weight: bold;
+    font-size: 50px;
+}
+
+.header p {
+    color: #c7ced4; /* Color del texto secundario */
+}
